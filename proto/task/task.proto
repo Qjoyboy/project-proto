@@ -4,7 +4,7 @@ option go_package = "github.com/Qjoyboy/project-proto/proto/task";
 import "google/protobuf/empty.proto";
 
 message Task {
-    uint32 id = 1;
+    string id = 1;
     string title = 2;
 }
 
@@ -22,7 +22,7 @@ message ListTasksResponse{
 }
 
 message DeleteTaskRequest{
-    uint32 id = 1;
+    string id = 1;
 }
 
 message DeleteTaskResponse{

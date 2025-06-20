@@ -2,13 +2,11 @@ syntax = "proto3";
 package user;
 option go_package = "github.com/Qjoyboy/project-proto/proto/user";
 import "google/protobuf/empty.proto";
-
-// Пользователь
+// Пользователь. Создание сообщение для прото файла
 message User{
     string id = 1;
     string email = 2;
 }
-
 // Запрос и ответ на создание
 message CreateUserRequest {
     string email = 1;

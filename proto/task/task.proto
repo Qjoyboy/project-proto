@@ -5,7 +5,9 @@ import "google/protobuf/empty.proto";
 
 message Task {
     string id = 1;
-    string title = 2;
+    string user_id =2;
+    string title = 3;
+    bool is_done = 4;
 }
 
 message CreateTaskRequest {

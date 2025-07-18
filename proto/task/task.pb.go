@@ -25,7 +25,9 @@ const (
 type Task struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	IsDone        bool                   `protobuf:"varint,4,opt,name=is_done,json=isDone,proto3" json:"is_done,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,11 +69,25 @@ func (x *Task) GetId() string {
 	return ""
 }
 
+func (x *Task) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
 func (x *Task) GetTitle() string {
 	if x != nil {
 		return x.Title
 	}
 	return ""
+}
+
+func (x *Task) GetIsDone() bool {
+	if x != nil {
+		return x.IsDone
+	}
+	return false
 }
 
 type CreateTaskRequest struct {
@@ -490,10 +506,12 @@ var File_proto_task_task_proto protoreflect.FileDescriptor
 
 const file_proto_task_task_proto_rawDesc = "" +
 	"\n" +
-	"\x15proto/task/task.proto\x12\x04task\x1a\x1bgoogle/protobuf/empty.proto\",\n" +
+	"\x15proto/task/task.proto\x12\x04task\x1a\x1bgoogle/protobuf/empty.proto\"^\n" +
 	"\x04Task\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\"B\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x17\n" +
+	"\ais_done\x18\x04 \x01(\bR\x06isDone\"B\n" +
 	"\x11CreateTaskRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\"4\n" +
@@ -518,13 +536,11 @@ const file_proto_task_task_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"1\n" +
 	"\x0fGetTaskResponse\x12\x1e\n" +
 	"\x04task\x18\x01 \x01(\v2\n" +
-	".task.TaskR\x04task2\xb1\x02\n" +
+	".task.TaskR\x04task2\xc6\x02\n" +
 	"\vTaskService\x12?\n" +
 	"\n" +
-	"CreateTask\x12\x17.task.CreateTaskRequest\x1a\x18.task.CreateTaskResponse\x12!\n" +
-	"\aGetTask\x12\n" +
-	".task.Task\x1a\n" +
-	".task.Task\x12<\n" +
+	"CreateTask\x12\x17.task.CreateTaskRequest\x1a\x18.task.CreateTaskResponse\x126\n" +
+	"\aGetTask\x12\x14.task.GetTaskRequest\x1a\x15.task.GetTaskResponse\x12<\n" +
 	"\tListTasks\x12\x16.google.protobuf.Empty\x1a\x17.task.ListTasksResponse\x12?\n" +
 	"\n" +
 	"DeleteTask\x12\x17.task.DeleteTaskRequest\x1a\x18.task.DeleteTaskResponse\x12?\n" +
@@ -564,12 +580,12 @@ var file_proto_task_task_proto_depIdxs = []int32{
 	0,  // 3: task.UpdateTaskResponse.task:type_name -> task.Task
 	0,  // 4: task.GetTaskResponse.task:type_name -> task.Task
 	1,  // 5: task.TaskService.CreateTask:input_type -> task.CreateTaskRequest
-	0,  // 6: task.TaskService.GetTask:input_type -> task.Task
+	8,  // 6: task.TaskService.GetTask:input_type -> task.GetTaskRequest
 	10, // 7: task.TaskService.ListTasks:input_type -> google.protobuf.Empty
 	4,  // 8: task.TaskService.DeleteTask:input_type -> task.DeleteTaskRequest
 	6,  // 9: task.TaskService.UpdateTask:input_type -> task.UpdateTaskRequest
 	2,  // 10: task.TaskService.CreateTask:output_type -> task.CreateTaskResponse
-	0,  // 11: task.TaskService.GetTask:output_type -> task.Task
+	9,  // 11: task.TaskService.GetTask:output_type -> task.GetTaskResponse
 	3,  // 12: task.TaskService.ListTasks:output_type -> task.ListTasksResponse
 	5,  // 13: task.TaskService.DeleteTask:output_type -> task.DeleteTaskResponse
 	7,  // 14: task.TaskService.UpdateTask:output_type -> task.UpdateTaskResponse

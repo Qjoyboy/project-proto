@@ -57,6 +57,7 @@ message ListUserTasksRequest {
 message ListUserTasksResponse {
     repeated Task task =1;
 }
+
 service TaskService{
     rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
     rpc GetTask (GetTaskRequest) returns (GetTaskResponse);

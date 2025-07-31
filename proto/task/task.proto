@@ -25,7 +25,6 @@ message ListTasksResponse{
 
 message DeleteTaskRequest{
     string id = 1;
-    string user_id = 2;
 }
 
 message DeleteTaskResponse{
@@ -33,8 +32,10 @@ message DeleteTaskResponse{
 }
 
 message UpdateTaskRequest {
-    Task task = 1;
+    string id = 1;
     string user_id = 2;
+    string title = 3;
+    bool is_done = 4;
 }
 
 message UpdateTaskResponse {
@@ -49,10 +50,18 @@ message GetTaskResponse {
     Task task = 1;
 }
 
+message ListUserTasksRequest {
+    string user_id = 1;
+}
+
+message ListUserTasksResponse {
+    repeated Task task =1;
+}
 service TaskService{
     rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
     rpc GetTask (GetTaskRequest) returns (GetTaskResponse);
     rpc ListTasks (google.protobuf.Empty) returns (ListTasksResponse);
     rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
     rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse);
+    rpc ListUserTasks (ListUserTasksRequest) returns (ListUserTasksResponse);
 }
